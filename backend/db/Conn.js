@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const pg = require('pg');
+import sequelize from 'sequelize';
+import pg from 'pg';
 
-const sequelize = new Sequelize({
+export const conn = new sequelize({
     port: 5432,
     database: 'crud',
     username: 'postgres',
@@ -12,11 +12,9 @@ const sequelize = new Sequelize({
 
 (async () => {
     try {
-        await sequelize.authenticate();
+        await sequelizeConn.authenticate();
         console.log('> DB Ok');
     } catch (error) {
         console.log(`> DB Error: ${error}`);
     }
 })();
-
-module.exports = sequelize;
