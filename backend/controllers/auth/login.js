@@ -1,7 +1,6 @@
 import { object, string } from 'yup';
 import { user } from '../../models/user.js';
-import { encryptPassword } from '../../utils/encryptPassword.js';
-
+import bcrypt from 'bcrypt';
 
 export async function login(req, res) {
     const { email, password } = req.body;
@@ -23,17 +22,14 @@ export async function login(req, res) {
     try {
         await userSchema.validate(req.body);
         
-        const data = user.findOne({
-            where: {
-                email,
-                password: encryptPassword(password)
-            }
+        const data = await user.findOne({
+            where: { email }
         });
 
-        if(data) {
-            return res.status(201).json({
-                "message": "deu tudo certo"
-            });;
+        const passIsValid = bcrypt.compareSync(password, data.dataValues.password)
+
+        if(passIsValid) {
+            return res.status(201);
         }
 
         return res.status(500).json({
