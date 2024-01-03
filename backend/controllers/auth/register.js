@@ -6,7 +6,7 @@ import { encryptPassword } from '../../utils/encryptPassword.js';
 export async function register(req, res) {
     const { username, email, password } = req.body;
     
-    let userSchema = object({
+    const userSchema = object({
         username: string()
             .required('Type a valid username.')
             .min(2, 'Username must be between 2-12 characters.')

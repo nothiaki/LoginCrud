@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 export async function login(req, res) {
     const { email, password } = req.body;
     
-    let userSchema = object({
+    const userSchema = object({
         email: string()
             .email()
             .required('Type a valid email.'),
@@ -33,7 +33,7 @@ export async function login(req, res) {
         }
 
         return res.status(500).json({
-            "message": "Internal server error."
+            "message": "Wrong password."
         });
 
     } catch (error) {
