@@ -1,9 +1,7 @@
 import { object, string } from 'yup';
 import { user } from '../../models/user.js';
 import { encryptPassword } from '../../utils/encryptPassword.js';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config();
+import { createToken } from '../../utils/createToken.js';
 
 export async function register(req, res) {
     const { username, email, password } = req.body;
@@ -39,11 +37,7 @@ export async function register(req, res) {
             password: encryptPassword(password)
         });
 
-        const token = jwt.sign(
-            { username: username },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
-        );
+        const token = createToken(username);
 
         return res.status(201).json({
             "message": "User created successfully.",
