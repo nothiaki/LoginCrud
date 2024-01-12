@@ -1,6 +1,9 @@
 import { object, string } from 'yup';
 import { user } from '../../models/user.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export async function login(req, res) {
     const { email, password } = req.body;
@@ -26,10 +29,19 @@ export async function login(req, res) {
             where: { email }
         });
 
-        const passIsValid = bcrypt.compareSync(password, data.dataValues.password)
+        const passIsValid = bcrypt.compareSync(password, data.dataValues.password);
 
         if(passIsValid) {
-            return res.status(201);
+            const token = jwt.sign(
+                { username: data.dataValues.username },
+                process.env.JWT_SECRET,
+                { expiresIn: '1h' }
+            );
+
+            return res.status(201).json({
+                "message": "Login successfuly.",
+                "token": token
+            });
         }
 
         return res.status(500).json({
