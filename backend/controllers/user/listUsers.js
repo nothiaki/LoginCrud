@@ -6,7 +6,7 @@ export async function listUsers(req, res) {
             attributes: ['username', 'email']
         });
         
-        return res.status(201).json({
+        return res.status(200).json({
             "data": data
         });
 
