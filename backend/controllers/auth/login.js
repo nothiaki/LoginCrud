@@ -29,17 +29,17 @@ export async function login(req, res) {
 
         const passIsValid = bcrypt.compareSync(password, data.dataValues.password);
 
-        if(passIsValid) {
-            const token = createToken(data.dataValues.username);
-
-            return res.status(201).json({
-                "message": "Login successfuly.",
-                "token": token
+        if(!passIsValid) {
+            return res.status(500).json({
+                "message": "Wrong password."
             });
         }
 
-        return res.status(500).json({
-            "message": "Wrong password."
+        const token = createToken(data.dataValues.username);
+
+        return res.status(201).json({
+            "message": "Login successfuly.",
+            "token": token
         });
 
     } catch (error) {
