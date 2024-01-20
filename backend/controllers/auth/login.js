@@ -1,5 +1,5 @@
 import { object, string } from 'yup';
-import { user } from '../../models/user.js';
+import { user } from '../../models/User.js';
 import bcrypt from 'bcrypt';
 import { createToken } from '../../utils/createToken.js';
 

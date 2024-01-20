@@ -6,7 +6,7 @@ import * as userController from '../controllers/user/index.js';
 const router = express.Router();
 
 router.get('/', userController.listUsers);
-router.get('/user/:username', userController.oneUser);
+router.get('/:username', userController.oneUser);
 
 router.post('/auth/register', checkUserExistence, authController.register);
 router.post('/auth/login', authController.login);
