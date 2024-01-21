@@ -1,6 +1,6 @@
 import { user } from '../../models/User.js';
 
-export async function oneUser(req, res) {
+export async function listOneUser(req, res) {
     const { username } = req.params;
 
     try {

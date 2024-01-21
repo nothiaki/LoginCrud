@@ -1,6 +1,6 @@
 import { user } from '../../models/User.js';
 
-export async function listUsers(req, res) {
+export async function listAllUsers(req, res) {
     try {
         const data = await user.findAll({
             attributes: ['username', 'email']
