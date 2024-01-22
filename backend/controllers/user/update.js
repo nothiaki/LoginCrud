@@ -9,7 +9,7 @@ export async function update(req, res) {
     try {
         if(!checkToken(token)) {
             return res.status(401).json({
-                "message": "You must be logged in to perform this operation"
+                "message": "You must be logged in to perform this operation."
             });
         };
 
