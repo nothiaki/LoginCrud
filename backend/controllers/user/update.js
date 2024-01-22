@@ -1,7 +1,5 @@
-import jwt from 'jsonwebtoken';
 import { user } from '../../models/User.js';
-import dotenv from 'dotenv';
-dotenv.config();
+import { checkToken } from '../../utils/checkToken.js';
 
 export async function update(req, res) {
     const { lastUsername } = req.params;
@@ -9,15 +7,11 @@ export async function update(req, res) {
     const token = req.headers.cookie.split('=')[1];
 
     try {
-        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET);
-
-        if(!verifiedToken) {
+        if(!checkToken(token)) {
             return res.status(401).json({
                 "message": "You must be logged in to perform this operation"
             });
         };
-
-        ///check if last username isnt null or undefined
 
         const data = await user.findOne({
             where: { username: lastUsername }
@@ -28,7 +22,6 @@ export async function update(req, res) {
                 "message": "User credentials not found."
             });
         }
-        //verify if username or email already exist in database
 
         data.username = username;
         data.email = email;

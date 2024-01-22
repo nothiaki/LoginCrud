@@ -12,7 +12,7 @@ router.get('/:username', appController.listOneUser);
 router.post('/auth/register', checkUserExistence, authController.register);
 router.post('/auth/login', authController.login);
 
-router.put('/update/:lastUsername', userController.update);
+router.put('/update/:lastUsername', checkUserExistence, userController.update);
 
 router.delete('/deleteUser/:username', userController.deleteUser);
 
