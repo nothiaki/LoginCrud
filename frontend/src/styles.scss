@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', 'sans-serif';
+    color: $text-primary;
+    font-weight: 500;
+}

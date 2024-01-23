@@ -1,0 +1,57 @@
+@use 'colors' as *;
+
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $background;
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 64px 64px;
+        gap: 18px;
+        background-color: $foreground;
+        border-radius: 2px;
+
+        h2 {
+            padding-bottom: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            input {
+                padding: 8px;
+                background-color: transparent;
+                border: none;
+                border-bottom: solid 1px $text-primary;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            button {
+                padding: 8px;
+                background-color: $green-primary;
+                border: none;
+                border-radius: 2px;
+                cursor: pointer;
+            }
+        }
+
+        p {
+            font-size: small;
+
+            a {
+                color: $green-primary;
+            }
+        }
+    }
+}
