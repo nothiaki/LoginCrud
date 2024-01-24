@@ -1,5 +1,6 @@
 import { user } from '../../models/User.js';
 import { checkToken } from '../../utils/checkToken.js';
+import { encryptPassword } from '../../utils/encryptPassword.js';
 
 export async function update(req, res) {
     const { lastUsername } = req.params;
@@ -25,7 +26,7 @@ export async function update(req, res) {
 
         data.username = username;
         data.email = email;
-        data.password = password;
+        data.password = encryptPassword(password);
         await data.save();
 
         return res.status(200).json({
