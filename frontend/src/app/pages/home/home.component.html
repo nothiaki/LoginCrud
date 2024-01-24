@@ -1,10 +1,10 @@
 <main>
     <div class="form-container">
         <h2>Create account</h2>
-        <form>
-            <input type="text" placeholder="Username">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
+        <form [formGroup]="formGroup" (ngSubmit)="submit()">
+            <input type="text" placeholder="Username" formControlName="username">
+            <input type="email" placeholder="Email" formControlName="email">
+            <input type="password" placeholder="Password" formControlName="password">
             <button type="submit">Create account</button>
         </form>
         <p>Already have an account? <a href="/login">login</a></p>
