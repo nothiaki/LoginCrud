@@ -43,7 +43,11 @@ export async function login(req, res) {
         });
 
         return res.status(200).json({
-            "message": "Login successfuly."
+            "message": "Login successfuly.",
+            "user": {
+                "username": data.dataValues.username,
+                "email": data.dataValues.email
+            }
         });
 
     } catch (error) {
