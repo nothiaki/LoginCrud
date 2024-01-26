@@ -3,7 +3,7 @@ import { checkToken } from '../../utils/checkToken.js';
 
 export async function deleteUser(req, res) {
     const { username } = req.params;
-    const token = req.headers.cookie.split('=')[1];
+    const { token } = req.body;
 
     try {
         if(!checkToken(token)) {

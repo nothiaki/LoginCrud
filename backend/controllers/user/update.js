@@ -4,8 +4,7 @@ import { encryptPassword } from '../../utils/encryptPassword.js';
 
 export async function update(req, res) {
     const { lastUsername } = req.params;
-    const { username, email, password } = req.body;
-    const token = req.headers.cookie.split('=')[1];
+    const { username, email, password, token } = req.body;
 
     try {
         if(!checkToken(token)) {

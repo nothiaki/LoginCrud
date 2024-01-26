@@ -38,14 +38,10 @@ export async function register(req, res) {
         });
 
         const token = createToken(username);
-        
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: true
-        });
 
         return res.status(201).json({
             "message": "User created successfully.",
+            "token": token,
             "user": {
                 "username": username,
                 "email": email
