@@ -13,9 +13,9 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   formGroup!: FormGroup;
 
-  protected formBuilder = inject(FormBuilder);
-  protected userService = inject(UserService);
-  protected router = inject(Router);
+  private formBuilder = inject(FormBuilder);
+  private userService = inject(UserService);
+  private router = inject(Router);
   
   constructor() {
     this.formGroup = this.formBuilder.group({
@@ -28,8 +28,14 @@ export class HomeComponent {
   submit(): void {
     this.userService.registerUser(this.formGroup.value)
       .subscribe({
-        next: () => {
-          this.router.navigate(['']);
+        next: res => {
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('username', res.user.username);
+          localStorage.setItem('email', res.user.email);
+
+          this.userService.setUserLoggedIn();
+
+          this.router.navigate([res.user.username]);
         },
         error: res => {
           console.log(res.error.message)
