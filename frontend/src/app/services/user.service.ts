@@ -2,18 +2,36 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 
-interface RegisterUserResponse {
-  message: string
+interface AuthUserResponse {
+  message: string,
+  token: string,
+  user: {
+    username: string,
+    email: string
+  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private isUserLoggedIn: boolean = false;
 
-  protected http = inject(HttpClient);
+  private http = inject(HttpClient);
   
   registerUser(body: string) {
-    return this.http.post<RegisterUserResponse>(`${environment.api}auth/register`, body);
+    return this.http.post<AuthUserResponse>(`${environment.api}auth/register`, body);
   };
+
+  loginUser(body: string) {
+    return this.http.post<AuthUserResponse>(`${environment.api}auth/login`, body);
+  };
+
+  setUserLoggedIn() {
+    this.isUserLoggedIn = true;
+  }
+
+  getUserLoggedIn() {
+    return this.isUserLoggedIn;
+  }
 }
