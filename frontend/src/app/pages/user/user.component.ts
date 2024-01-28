@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -10,4 +11,14 @@ import { Component } from '@angular/core';
 export class UserComponent {
   username: string | null = localStorage.getItem('username');
   email: string | null = localStorage.getItem('email');
+
+  private router = inject(Router);
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    
+    this.router.navigate(['/register']);
+  }
 }
