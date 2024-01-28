@@ -5,12 +5,11 @@ import { UserComponent } from './pages/user/user.component';
 import { userGuard } from './guard/user.guard';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
+    { path: '', redirectTo: '/register', pathMatch: 'full' },
     { path: 'register', component: HomeComponent },
     { path: 'login', component: LoginComponent },
 
     { path: ':username', component: UserComponent, canActivate: [userGuard] },
     
-    { path: '**', component: HomeComponent }
+    { path: '**', redirectTo: '/register', pathMatch: 'full' }
 ];
