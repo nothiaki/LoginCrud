@@ -27,11 +27,11 @@ export class UserService {
     return this.http.post<AuthUserResponse>(`${environment.api}auth/login`, body);
   };
 
-  setUserLoggedIn() {
-    this.isUserLoggedIn = true;
+  setUserLoggedIn(): boolean {
+    return this.isUserLoggedIn = true;
   }
 
-  getUserLoggedIn() {
+  getUserLoggedIn(): boolean {
     return this.isUserLoggedIn;
   }
 }
