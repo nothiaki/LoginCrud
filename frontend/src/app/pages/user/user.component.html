@@ -1,7 +1,21 @@
 <main>
+    @if(showModal) {
+        <div class="modal-background">
+            <div class="modal">
+                <h2 (click)="modalControl()">x</h2>
+                <form>
+                    <input type="text" placeholder="username" value="{{ username }}">
+                    <input type="text" placeholder="email" value="{{ email }}">
+                    <input type="text" placeholder="new password">
+                    <button (click)="editUser()">confirm</button>
+                </form>
+            </div>
+        </div>
+    }
     <div class="profile-container">
+        <h3>username: {{ username }}</h3>
+        <h3>email: {{ email }}</h3>
+        <button (click)="modalControl()">edit user</button>
         <button (click)="logout()">logout</button>
-        <p>{{ username }}</p>
-        <p>{{ email }}</p>
     </div>
 </main>
