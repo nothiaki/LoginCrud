@@ -29,9 +29,13 @@ export class UserService {
 
   setUserLoggedIn(): boolean {
     return this.isUserLoggedIn = true;
-  }
+  };
 
   getUserLoggedIn(): boolean {
     return this.isUserLoggedIn;
-  }
+  };
+
+  editUser(body: string, lastUsername: string | null) {
+    return this.http.put(`${environment.api}update/${lastUsername}`, body);
+  };
 }

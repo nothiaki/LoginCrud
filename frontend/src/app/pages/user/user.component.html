@@ -3,11 +3,11 @@
         <div class="modal-background">
             <div class="modal">
                 <h2 (click)="modalControl()">x</h2>
-                <form>
-                    <input type="text" placeholder="username" value="{{ username }}">
-                    <input type="text" placeholder="email" value="{{ email }}">
-                    <input type="text" placeholder="new password">
-                    <button (click)="editUser()">confirm</button>
+                <form [formGroup]="formGroup" (ngSubmit)="editUser()">
+                    <input type="text" placeholder="username" formControlName="username">
+                    <input type="email" placeholder="email" formControlName="email">
+                    <input type="password" placeholder="new password" formControlName="password">
+                    <button>confirm</button>
                 </form>
             </div>
         </div>

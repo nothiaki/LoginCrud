@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -22,7 +22,7 @@ export class UserComponent {
 
   constructor() {
     this.formGroup = this.formBuilder.group({
-      userrname: '',
+      username: '',
       email: '',
       password: ''
     });
@@ -41,6 +41,16 @@ export class UserComponent {
   }
 
   editUser(): void {
-    console.log('editUser');
-  }
+    this.formGroup.value.token = localStorage.getItem('token');
+    this.userService.editUser(this.formGroup.value, this.username)
+      .subscribe({
+        next: res => {
+          console.log(res);
+          this.modalControl();
+        },
+        error: res => {
+          console.log(res.error.message);
+        }
+      })
+    };
 }
