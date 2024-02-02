@@ -1,6 +1,7 @@
 import { user } from '../../models/User.js';
 import { checkToken } from '../../utils/checkToken.js';
 import { encryptPassword } from '../../utils/encryptPassword.js';
+import { createToken } from '../../utils/createToken.js';
 
 export async function update(req, res) {
     const { lastUsername } = req.params;
@@ -28,8 +29,15 @@ export async function update(req, res) {
         data.password = encryptPassword(password);
         await data.save();
 
+        const newToken = createToken(username);
+
         return res.status(200).json({
-            "message": "User credentials updated sucessfully."
+            "message": "User credentials updated sucessfully.",
+            "token": newToken,
+            "user": {
+                "username": username,
+                "email": email
+            }
         });
 
     } catch (error) {
