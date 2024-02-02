@@ -2,8 +2,7 @@ import { user } from '../../models/User.js';
 import { checkToken } from '../../utils/checkToken.js';
 
 export async function deleteUser(req, res) {
-    const { username } = req.params;
-    const { token } = req.body;
+    const { username, token } = req.params;
 
     try {
         if(!checkToken(token)) {
@@ -16,7 +15,7 @@ export async function deleteUser(req, res) {
             where: { username }
         });
 
-        return res.status(201).json({
+        return res.status(200).json({
             "message": "Account was deleted."
         });
 

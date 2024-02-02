@@ -14,6 +14,6 @@ router.post('/auth/login', authController.login);
 
 router.put('/update/:lastUsername', checkUserExistence, userController.update);
 
-router.delete('/deleteUser/:username', userController.deleteUser);
+router.delete('/deleteUser/:username/:token', userController.deleteUser);
 
 export default router;
