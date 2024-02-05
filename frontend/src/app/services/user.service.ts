@@ -38,4 +38,8 @@ export class UserService {
   editUser(body: string, lastUsername: string | null) {
     return this.http.put(`${environment.api}update/${lastUsername}`, body);
   };
+
+  deleteUser(username: string | null, token: string | null) {
+    return this.http.delete(`${environment.api}deleteUser/${username}/${token}`);
+  };
 }

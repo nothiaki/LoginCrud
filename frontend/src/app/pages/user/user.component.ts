@@ -14,6 +14,7 @@ export class UserComponent {
   formGroup!: FormGroup;
   username: string | null = localStorage.getItem('username');
   email: string | null = localStorage.getItem('email');
+  token: string | null = localStorage.getItem('token');
   showModal: boolean = false;
 
   private formBuilder = inject(FormBuilder);
@@ -26,7 +27,7 @@ export class UserComponent {
       email: '',
       password: ''
     });
-  }
+  };
 
   logout(): void {
     localStorage.removeItem('token');
@@ -34,23 +35,35 @@ export class UserComponent {
     localStorage.removeItem('email');
     
     this.router.navigate(['/register']);
-  }
+  };
 
   modalControl(): void {
     this.showModal = !this.showModal;
-  }
+  };
 
   editUser(): void {
-    this.formGroup.value.token = localStorage.getItem('token');
+    this.formGroup.value.token = this.token;
     this.userService.editUser(this.formGroup.value, this.username)
       .subscribe({
         next: res => {
           console.log(res);
-          this.modalControl();
+          this.logout();
         },
         error: res => {
           console.log(res.error.message);
         }
       })
-    };
+  };
+
+  delete(): void {
+    this.userService.deleteUser(this.username, this.token)
+      .subscribe({
+        next: () => {
+          this.logout();
+        },
+        error: res => {
+          console.log(res);
+        }
+      })
+  };
 }
