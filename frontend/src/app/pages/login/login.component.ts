@@ -12,6 +12,8 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent {
   formGroup!: FormGroup;
+  errorMessage!: string;
+  errorControl: boolean = false;
 
   private formBuilder = inject(FormBuilder);
   private userService = inject(UserService);
@@ -37,7 +39,8 @@ export class LoginComponent {
           this.router.navigate([res.user.username]);
         },
         error: res => {
-          console.log(res.error.message)
+          this.errorControl = true;
+          this.errorMessage = res.error.message;
         }
       });
   };

@@ -7,6 +7,16 @@ main {
     align-items: center;
     justify-content: center;
     background-color: $background;
+    position: relative;
+
+    .error {
+        position: absolute;
+        padding: 8px;
+        top: 12px;
+        background-color: $foreground;
+        border-radius: 2px;
+        border-top: solid 2px $red-primary;
+    }
 
     .form-container {
         display: flex;

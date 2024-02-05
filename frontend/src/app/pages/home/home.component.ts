@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   formGroup!: FormGroup;
+  errorMessage!: string;
+  errorControl: boolean = false;
 
   private formBuilder = inject(FormBuilder);
   private userService = inject(UserService);
@@ -38,7 +40,8 @@ export class HomeComponent {
           this.router.navigate([res.user.username]);
         },
         error: res => {
-          console.log(res.error.message)
+          this.errorControl = true;
+          this.errorMessage = res.error.message;
         }
       });
   };

@@ -1,4 +1,9 @@
 <main>
+    @if(errorControl) {
+        <div class="error">
+            <p>{{ errorMessage }}</p>
+        </div>
+    }
     <div class="form-container">
         <h2>Login your account</h2>
         <form [formGroup]="formGroup" (ngSubmit)="submit()">
